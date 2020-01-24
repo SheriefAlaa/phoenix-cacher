@@ -14,13 +14,9 @@ defmodule PhoenixCacherWeb.Router do
   end
 
   scope "/", PhoenixCacherWeb do
-    pipe_through :browser
+    pipe_through :api
 
-    get "/", PageController, :index
+    post "/reaction", API.ReactionController, :save_reaction
+    get "/reaction_count/:content_id", API.ReactionController, :get_reaction_count
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", PhoenixCacherWeb do
-  #   pipe_through :api
-  # end
 end

@@ -9,12 +9,19 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+# Load test using wrk
+```
+wrk -t10 -c25 -d60s  --script ./random_alpha.lua http://localhost:4000/reaction
+```
 
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+# Example test output:
+```
+Running 1m test @ http://localhost:4000/reaction
+  10 threads and 25 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    22.71ms   19.21ms 471.84ms   95.21%
+    Req/Sec    94.55     27.65   171.00     75.08%
+  56279 requests in 1.00m, 13.00MB read
+Requests/sec:    937.13
+Transfer/sec:    221.64KB
+```
